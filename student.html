@@ -1,27 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Dashboard</title>
     <link rel="stylesheet" href="student.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
   </head>
   <body>
-    <div class="container">
-      <button class="logout-btn" onclick="logout()">Logout</button>
-      <button id="openProfileModal" type="button">Edit Profile</button>
-      <h2>Student Dashboard</h2>
+    <header class="student-header">
+      <div class="header-content">
+        <img
+          src="https://img.freepik.com/free-photo/harvard-university-cambridge-usa_1268-14363.jpg?semt=ais_hybrid&w=740&q=80"
+          alt="PUP Logo"
+          class="student-logo"
+        />
+        <div>
+          <h1>Student Dashboard</h1>
+          <span class="subtitle">University Campus</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="openProfileModal" type="button" title="Edit Profile">
+          <i class="fas fa-user-edit"></i>
+        </button>
+        <button class="logout-btn" onclick="logout()" title="Logout">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+      </div>
+    </header>
 
-      <section>
-        <h3>Profile</h3>
-        <p><strong>Name:</strong> <span id="studentName"></span></p>
-        <p><strong>ID:</strong> <span id="studentID"></span></p>
-        <p><strong>Email:</strong> <span id="studentEmail"></span></p>
-        <p><strong>Contact:</strong> <span id="studentContact"></span></p>
+    <main class="main-container">
+      <section class="card profile-card">
+        <h2><i class="fas fa-user"></i> Profile</h2>
+        <div class="profile-info">
+          <img
+            id="studentProfilePic"
+            class="profile-pic"
+            src="https://ui-avatars.com/api/?name=Student"
+            alt="Profile Picture"
+          />
+          <p><strong>Name:</strong> <span id="studentName"></span></p>
+          <p><strong>ID:</strong> <span id="studentID"></span></p>
+          <p><strong>Email:</strong> <span id="studentEmail"></span></p>
+          <p><strong>Contact:</strong> <span id="studentContact"></span></p>
+        </div>
       </section>
 
-      <section>
-        <h3>Course & Grades</h3>
+      <section class="card grades-card">
+        <h2><i class="fas fa-graduation-cap"></i> Course & Grades</h2>
         <p><strong>Course:</strong> <span id="studentCourse"></span></p>
         <table id="gradeTable">
           <tr>
@@ -31,26 +67,28 @@
         </table>
       </section>
 
-      <section>
-        <h3>Attendance</h3>
-        <ul id="attendanceList"></ul>
+      <section class="card attendance-card">
+        <h2><i class="fas fa-calendar-check"></i> Attendance</h2>
+        <table id="attendanceTable">
+          <tr>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </table>
       </section>
-
-      <section>
-        <h3>Billing Status</h3>
-        <p><strong>Status:</strong> <span id="billingStatus"></span></p>
+      <section class="card schedule-card">
+        <h2><i class="fas fa-calendar-alt"></i> Schedule</h2>
+        <button id="openScheduleModal" type="button" class="primary-btn">
+          <i class="fas fa-eye"></i> View Full Schedule
+        </button>
       </section>
+    </main>
 
-      <section>
-        <h3>Schedule</h3>
-        <button id="openScheduleModal" type="button">View Full Schedule</button>
-      </section>
-    </div>
-
+    <!-- Schedule Modal -->
     <div id="scheduleModal" class="modal">
       <div class="modal-content">
         <span class="close" id="closeScheduleModal">&times;</span>
-        <h3>My Schedule</h3>
+        <h3><i class="fas fa-calendar-alt"></i> My Schedule</h3>
         <table id="modalScheduleTable">
           <tr>
             <th>Day</th>
@@ -61,24 +99,42 @@
       </div>
     </div>
 
+    <!-- Profile Modal -->
     <div id="profileModal" class="modal">
       <div class="modal-content">
         <span class="close" id="closeProfileModal">&times;</span>
-        <h3>Edit Profile</h3>
+        <h3><i class="fas fa-user-edit"></i> Edit Profile</h3>
         <form id="profileForm">
+          <label>
+            Profile Picture:
+            <input type="file" id="editProfilePic" accept="image/*" />
+          </label>
+          <br />
           <label>Email: <input type="email" id="editEmail" required /></label
-          ><br /><br />
-          <label>Contact: <input type="text" id="editContact" /></label
-          ><br /><br />
-          <label
-            >New Password:
+          ><br />
+          <label>
+            Contact:
+            <input
+              type="text"
+              id="editContact"
+              maxlength="12"
+              pattern="\d*"
+              inputmode="numeric"
+            />
+          </label>
+          <br />
+          <label>
+            New Password:
             <input
               type="password"
               id="editPassword"
               placeholder="Leave blank to keep current"
-            /> </label
-          ><br /><br />
-          <button type="submit">Save</button>
+            />
+          </label>
+          <br />
+          <button type="submit" class="primary-btn">
+            <i class="fas fa-save"></i> Save
+          </button>
         </form>
       </div>
     </div>
@@ -86,4 +142,3 @@
     <script src="student.js"></script>
   </body>
 </html>
-

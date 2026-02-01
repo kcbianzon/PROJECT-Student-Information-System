@@ -1,4 +1,4 @@
-/* Admin Dashboard Summary
+/* Admin Dashboard
  * handles student enrollment, editing, deletion, attendance, and scheduling.
  * uses localStorage for data management.
  * the data can be retrieve by the student dash board so that it makes it so that the student dashboard gets the data and displays it correspondingly.
@@ -20,6 +20,14 @@ document.addEventListener("DOMContentLoaded", function () {
         enrollStudent();
       }
     });
+
+  var idInput = document.getElementById("modalStudentID");
+  var contactInput = document.getElementById("modalStudentContact");
+  if (idInput) allowOnlyNumbers(idInput);
+  if (contactInput) allowOnlyNumbers(contactInput);
+
+  var editContact = document.getElementById("editContact");
+  if (editContact) allowOnlyNumbers(editContact);
 });
 
 function loadStudents() {
@@ -55,22 +63,46 @@ function loadStudents() {
 }
 
 function enrollStudent() {
-  var name = document.getElementById("modalStudentName").value.trim();
-  var id = document.getElementById("modalStudentID").value.trim();
+  var students = JSON.parse(localStorage.getItem("students")) || [];
+  var idInput = document.getElementById("modalStudentID");
+  var nameInput = document.getElementById("modalStudentName");
+  var newID = idInput.value.trim();
+  var newName = nameInput.value.trim();
+
+  var isDuplicateID = students.some((student, idx) => {
+    if (editMode && idx === editIndex) return false;
+    return student.id === newID;
+  });
+
+  var isDuplicateName = students.some((student, idx) => {
+    if (editMode && idx === editIndex) return false;
+    return student.name.toLowerCase() === newName.toLowerCase();
+  });
+
+  if (isDuplicateID) {
+    alert("Student ID must be unique!");
+    idInput.focus();
+    return false;
+  }
+  if (isDuplicateName) {
+    alert("Student Name must be unique!");
+    nameInput.focus();
+    return false;
+  }
+
   var course = document.getElementById("modalStudentCourse").value.trim();
   var grade = document.getElementById("modalStudentGrade").value.trim();
   var email = document.getElementById("modalStudentEmail").value.trim();
   var contact = document.getElementById("modalStudentContact").value.trim();
 
-  if (!name || !id || !course || !email) {
+  if (!newID || !course || !email) {
     alert("Please fill in all required fields.");
     return;
   }
 
-  var students = JSON.parse(localStorage.getItem("students")) || [];
   students.push({
-    name,
-    id,
+    name: newName,
+    id: newID,
     course,
     grade,
     email,
@@ -147,7 +179,7 @@ function deleteStudent(index) {
 }
 
 function logout() {
-  window.location.href = "../index.html";
+  window.location.href = "/PROJECT-Student-Information-System/index.html";
 }
 
 function openModal() {
@@ -210,9 +242,11 @@ function renderScheduleTable() {
     row.insertCell(0).innerText = sched.day;
     row.insertCell(1).innerText = sched.time;
     row.insertCell(2).innerText = sched.subject;
-    row.insertCell(
-      3
-    ).innerHTML = `<button type="button" onclick="removeScheduleRow(${idx})" style="background:#e74c3c;">Remove</button>`;
+    row.insertCell(3).innerHTML = `
+      <button type="button" class="remove-btn" title="Remove" onclick="removeScheduleRow(${idx})">
+        <i class="fas fa-trash-alt"></i>
+      </button>
+    `;
   });
 }
 
@@ -256,3 +290,9 @@ window.onclick = function (event) {
   if (event.target == enrollModal) closeModal();
   if (event.target == scheduleModal) closeScheduleModal();
 };
+
+function allowOnlyNumbers(input) {
+  input.addEventListener("input", function () {
+    this.value = this.value.replace(/\D/g, "").slice(0, 12);
+  });
+}

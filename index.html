@@ -1,18 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SIS Login</title>
     <link rel="stylesheet" href="project.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div class="container">
-      <h2>Student Information System</h2>
-      <input type="text" id="username" placeholder="Enter your username" />
-      <input type="password" id="password" placeholder="Enter your password" />
-      <button onclick="login()">Login</button>
-      <p id="message"></p>
+    <div class="main-wrapper">
+      <div class="container glass">
+        <img
+          src="https://img.freepik.com/free-photo/harvard-university-cambridge-usa_1268-14363.jpg?semt=ais_hybrid&w=740&q=80"
+          alt="PUP Logo"
+          class="logo"
+        />
+        <h2>Student Information System</h2>
+        <h3>University Campus</h3>
+        <div id="role-select">
+          <button id="studentBtn" class="role-btn">Student</button>
+          <button id="facultyBtn" class="role-btn">Faculty</button>
+        </div>
+        <form id="loginForm" style="display: none">
+          <input type="hidden" id="role" value="student" />
+          <input
+            type="text"
+            id="username"
+            placeholder="Username"
+            required
+            autocomplete="username"
+          />
+          <div class="password-wrapper">
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              required
+              autocomplete="current-password"
+            />
+            <button
+              type="button"
+              id="togglePassword"
+              tabindex="-1"
+              aria-label="Show password"
+            ></button>
+          </div>
+          <button type="submit" class="login-btn">Login</button>
+          <p id="message"></p>
+        </form>
+      </div>
     </div>
     <script src="project.js"></script>
   </body>

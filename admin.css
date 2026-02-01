@@ -1,87 +1,222 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: 'Roboto', Arial, sans-serif;
+    background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
     min-height: 100vh;
-    background-image: url('https://the-post-assets.sgp1.digitaloceanspaces.com/2022/09/PUP_thumbnail-1.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-    position: relative;
-    overflow: hidden;
+    margin: 0;
 }
 
-.container,
-.modal-content {
-    position: relative;
-    z-index: 1;
+.admin-header {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    padding: 18px 0 12px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-.container {
-    width: 80%;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-left: 32px;
+}
+
+.admin-logo {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background: #fff;
+    object-fit: cover;
+}
+
+.admin-header h1 {
+    margin: 0;
+    font-size: 1.6em;
+    font-weight: 700;
+    color: #2d3a4b;
+    letter-spacing: 0.5px;
+}
+
+.subtitle {
+    font-size: 1em;
+    color: #4b5c6b;
+    font-weight: 400;
+    letter-spacing: 0.2px;
 }
 
 .logout-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    padding: 8px 12px;
-    background-color: red;
-    color: white;
+    margin-right: 32px;
+    padding: 9px 18px;
+    background: #e74c3c;
+    color: #fff;
     border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 500;
     cursor: pointer;
+    transition: background 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.logout-btn:hover {
+    background: #c0392b;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.93);
+    margin: 38px auto 0 auto;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.13);
+    padding: 32px 28px 28px 28px;
+    max-width: 1100px;
+    min-width: 320px;
+}
+
+.student-list-section {
+    margin-bottom: 30px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 1.25em;
+    color: #2d3a4b;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.primary-btn {
+    background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s, box-shadow 0.18s;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.primary-btn:hover {
+    background: #0056b3;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    background: #f8f9fa;
 }
 
 table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 0;
+    background: #f8f9fa;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 th,
 td {
-    border: 1px solid #ddd;
-    padding: 10px;
+    padding: 12px 10px;
     text-align: center;
+    font-size: 1em;
 }
 
 th {
-    background-color: #007bff;
-    color: white;
+    background: #007bff;
+    color: #fff;
+    font-weight: 600;
+    border-top: none;
 }
 
-.form-section {
-    margin-top: 20px;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
+tr:nth-child(even) td {
+    background: #f1f5fa;
 }
 
-input {
-    width: 90%;
-    padding: 8px;
-    margin: 5px 0;
+tr:hover td {
+    background: #e3f0ff;
+}
+
+td {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+table tr:last-child td {
+    border-bottom: none;
 }
 
 button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+    font-family: inherit;
 }
 
-button:hover {
-    background-color: #0056b3;
+#studentTable button {
+    margin: 2px 2px;
+    padding: 7px 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 0.98em;
+    cursor: pointer;
+    transition: background 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+#studentTable button[onclick^="editStudent"] {
+    background: #f1c40f;
+    color: #fff;
+}
+
+#studentTable button[onclick^="editStudent"]:hover {
+    background: #b7950b;
+}
+
+#studentTable button[onclick^="deleteStudent"] {
+    background: #e74c3c;
+    color: #fff;
+}
+
+#studentTable button[onclick^="deleteStudent"]:hover {
+    background: #c0392b;
+}
+
+#studentTable button[onclick^="markAttendance"] {
+    background: #27ae60;
+    color: #fff;
+}
+
+#studentTable button[onclick^="markAttendance"]:hover {
+    background: #1e8449;
+}
+
+#studentTable button[onclick^="openScheduleModal"] {
+    background: #007bff;
+    color: #fff;
+}
+
+#studentTable button[onclick^="openScheduleModal"]:hover {
+    background: #0056b3;
 }
 
 .modal {
@@ -93,20 +228,35 @@ button:hover {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.25);
+    transition: background 0.2s;
 }
 
 .modal-content {
-    background-color: #fff;
-    margin: 8% auto;
-    padding: 30px 20px;
-    border: 1px solid #888;
-    width: 500px;
-    /* Increased from 350px */
-    max-width: 95vw;
-    border-radius: 10px;
+    background: #fff;
+    margin: 4vh auto;
+    padding: 38px 36px 28px 36px;
+    border-radius: 20px;
+    width: 600px;
+    max-width: 98vw;
+    max-height: 90vh;
+    box-shadow: 0 12px 48px 0 rgba(31, 38, 135, 0.22);
     position: relative;
     text-align: left;
+    animation: modalFadeIn 0.25s;
+    overflow-y: auto;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .close {
@@ -117,54 +267,230 @@ button:hover {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    transition: color 0.15s;
 }
 
 .close:hover,
 .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+    color: #007bff;
 }
 
-#enrollForm input {
-    width: 95%;
-    padding: 8px;
-    margin: 8px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
+#enrollForm input,
 #enrollForm select {
-    width: 95%;
-    padding: 8px;
+    width: 100%;
+    padding: 10px;
     margin: 8px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    border-radius: 6px;
+    border: 1.5px solid #b0c4de;
+    font-size: 1em;
+    background: #f7fafc;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+#enrollForm input:focus,
+#enrollForm select:focus {
+    border: 1.5px solid #007bff;
+    outline: none;
+    background: #fff;
+    box-shadow: 0 0 0 2px #c2e9fb;
 }
 
 #enrollForm button {
     width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    margin-top: 14px;
 }
 
-#enrollForm button:hover {
-    background-color: #0056b3;
+#scheduleTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 18px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 #scheduleTable th,
 #scheduleTable td {
-    border: 1px solid #ddd;
-    padding: 7px;
+    padding: 13px 10px;
     text-align: center;
+    font-size: 1em;
 }
 
 #scheduleTable th {
     background: #007bff;
-    color: white;
+    color: #fff;
+    font-weight: 600;
+    border-top: none;
+}
+
+#scheduleTable tr:nth-child(even) td {
+    background: #f1f5fa;
+}
+
+#scheduleTable tr:hover td {
+    background: #e3f0ff;
+}
+
+#scheduleTable td {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#scheduleTable tr:last-child td {
+    border-bottom: none;
+}
+
+.schedule-inputs {
+    display: flex;
+    gap: 18px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    background: #f7fafc;
+    padding: 18px 12px 10px 12px;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.sched-field {
+    display: flex;
+    flex-direction: column;
+    min-width: 110px;
+    flex: 1 1 120px;
+}
+
+.sched-field label {
+    font-size: 1em;
+    color: #2d3a4b;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.schedule-inputs select,
+.schedule-inputs input[type="time"] {
+    padding: 10px;
+    border-radius: 7px;
+    border: 1.5px solid #b0c4de;
+    font-size: 1em;
+    background: #fff;
+    min-width: 90px;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.schedule-inputs select:focus,
+.schedule-inputs input[type="time"]:focus {
+    border: 1.5px solid #007bff;
+    outline: none;
+    background: #fff;
+    box-shadow: 0 0 0 2px #c2e9fb;
+}
+
+.add-btn {
+    background: #27ae60;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 16px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    margin-top: 20px;
+}
+
+.add-btn:hover {
+    background: #1e8449;
+}
+
+/* --- Modal Title --- */
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-size: 1.25em;
+    color: #2d3a4b;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* --- Remove Button --- */
+.remove-btn {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    font-size: 1.3em;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 50%;
+    transition: background 0.15s, color 0.15s;
+}
+
+.remove-btn:hover {
+    background: #fdecea;
+    color: #c0392b;
+}
+
+@media (max-width: 700px) {
+    .container {
+        padding: 10px !important;
+        margin: 10px auto !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        min-width: unset !important;
+        max-width: 98vw !important;
+    }
+
+    .modal-content {
+        width: 98vw !important;
+        max-width: 98vw !important;
+        padding: 12px !important;
+        margin: 10px auto !important;
+        border-radius: 0 !important;
+    }
+
+    .header-content {
+        margin-left: 10px;
+    }
+
+    .logout-btn {
+        margin-right: 10px;
+    }
+
+    .admin-logo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .admin-header h1 {
+        font-size: 1.1em;
+    }
+
+    .subtitle {
+        font-size: 0.95em;
+    }
+
+    th,
+    td {
+        font-size: 0.95em !important;
+        padding: 6px !important;
+    }
+
+    .section-header h2 {
+        font-size: 1em;
+    }
+
+    .primary-btn {
+        font-size: 0.95em;
+        padding: 8px 12px;
+    }
+
+    .schedule-inputs {
+        flex-direction: column;
+        gap: 5px;
+    }
 }
