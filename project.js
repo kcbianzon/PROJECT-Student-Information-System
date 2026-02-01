@@ -48,3 +48,6 @@ async function login() {
   }
   alert("Invalid credentials!");
 }
+alert(
+  "Welcome to the Student Information System! Please log in to faculty to setup student, username: admin, password: admin123. For student login, use any enrolled student credentials or default password student123 if none set.",
+);
