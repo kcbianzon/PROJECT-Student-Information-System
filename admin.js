@@ -17,6 +17,51 @@ function openModal() {
 function closeModal() {
   document.getElementById("enrollModal").style.display = "none";
 }
+function editStudent(id) {
+  // Fetch student data
+  fetch(
+    `https://project-student-information-system.onrender.com/students/${id}`,
+  )
+    .then((res) => res.json())
+    .then((student) => {
+      // Fill modal with student data
+      document.getElementById("modalStudentName").value = student.name;
+      document.getElementById("modalStudentID").value = student.id;
+      document.getElementById("modalStudentCourse").value = student.course;
+      document.getElementById("modalStudentGrade").value = student.grade;
+      document.getElementById("modalStudentEmail").value = student.email;
+      document.getElementById("modalStudentContact").value = student.contact;
+
+      // Show modal
+      openModal();
+
+      // Override form submit to update instead of create
+      document.getElementById("enrollForm").onsubmit = async function (e) {
+        e.preventDefault();
+        await fetch(
+          `https://project-student-information-system.onrender.com/students/${id}`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: document.getElementById("modalStudentName").value.trim(),
+              id: document.getElementById("modalStudentID").value.trim(),
+              course: document
+                .getElementById("modalStudentCourse")
+                .value.trim(),
+              grade: document.getElementById("modalStudentGrade").value.trim(),
+              email: document.getElementById("modalStudentEmail").value.trim(),
+              contact: document
+                .getElementById("modalStudentContact")
+                .value.trim(),
+            }),
+          },
+        );
+        loadStudents();
+        closeModal();
+      };
+    });
+}
 
 async function loadStudents() {
   const res = await fetch(

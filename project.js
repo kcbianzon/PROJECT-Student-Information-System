@@ -21,6 +21,21 @@ document.addEventListener("DOMContentLoaded", function () {
     login();
   };
 });
+async function login(username, password) {
+  const res = await fetch(
+    "https://project-student-information-system.onrender.com/students/login",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    },
+  );
+
+  if (!res.ok) throw new Error("Login failed");
+  const student = await res.json();
+  localStorage.setItem("student", JSON.stringify(student));
+  window.location.href = "student.html";
+}
 
 async function login() {
   const role = document.getElementById("role").value;

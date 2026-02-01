@@ -1,6 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
   loadStudentData();
 });
+async function markAttendance(id, date) {
+  await fetch(
+    `https://project-student-information-system.onrender.com/students/${id}/attendance`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ date }),
+    },
+  );
+  loadStudentData(id);
+}
 
 async function loadStudentData() {
   const studentId = localStorage.getItem("loggedInStudentID");

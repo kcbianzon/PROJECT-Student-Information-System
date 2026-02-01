@@ -74,6 +74,12 @@ app.post("/students/login", async (req, res) => {
     return res.status(401).json({ error: "Invalid credentials" });
   res.json(student);
 });
+app.put("/students/:id/attendance", async (req, res) => {
+  const student = await Student.findById(req.params.id);
+  student.attendance.push(req.body.date);
+  await student.save();
+  res.json(student);
+});
 
 // Start server
 const PORT = process.env.PORT || 3000;
