@@ -6,25 +6,30 @@ const app = express();
 app.use(cors()); // allow requests from your GitHub Pages site
 app.use(express.json());
 
-// connect to MongoDB Atlas
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+const { MongoClient, ServerApiVersion } = require("mongodb");
+const uri =
+  "mongodb+srv://ADMIN:1234@kenneth.mc3y14c.mongodb.net/sample_mflix?retryWrites=true&w=majority";
+
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
 });
 
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => console.log("Connected to MongoDB"));
-
-// Example schema
-const ItemSchema = new mongoose.Schema({ name: String });
-const Item = mongoose.model("Item", ItemSchema);
-
-// Example route
-app.get("/items", async (req, res) => {
-  const items = await Item.find();
-  res.json(items);
-});
+async function run() {
+  try {
+    await client.connect();
+    await client.db("sample_mflix").command({ ping: 1 });
+    console.log(
+      "Pinged your deployment. You successfully connected to MongoDB!",
+    );
+  } finally {
+    await client.close();
+  }
+}
+run().catch(console.dir);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
