@@ -1,3 +1,4 @@
+// Run after DOM is ready
 document.addEventListener("DOMContentLoaded", function () {
   loadStudents();
   document
@@ -8,8 +9,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Global functions so HTML can call them
+function openModal() {
+  document.getElementById("enrollModal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("enrollModal").style.display = "none";
+}
+
 async function loadStudents() {
-  const res = await fetch("https://your-app.onrender.com/students");
+  const res = await fetch(
+    "https://project-student-information-system.onrender.com/students",
+  );
   const students = await res.json();
 
   const studentTable = document.getElementById("studentTable");
@@ -45,11 +57,14 @@ async function enrollStudent() {
     contact: document.getElementById("modalStudentContact").value.trim(),
   };
 
-  const res = await fetch("https://your-app.onrender.com/students", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(newStudent),
-  });
+  const res = await fetch(
+    "https://project-student-information-system.onrender.com/students",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newStudent),
+    },
+  );
 
   if (res.ok) {
     loadStudents();
@@ -60,9 +75,12 @@ async function enrollStudent() {
 }
 
 async function deleteStudent(id) {
-  await fetch(`https://your-app.onrender.com/students/${id}`, {
-    method: "DELETE",
-  });
+  await fetch(
+    `https://project-student-information-system.onrender.com/students/${id}`,
+    {
+      method: "DELETE",
+    },
+  );
   loadStudents();
 }
 
