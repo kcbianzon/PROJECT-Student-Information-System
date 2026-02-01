@@ -21,21 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
     login();
   };
 });
-async function login(username, password) {
-  const res = await fetch(
-    "https://project-student-information-system.onrender.com/students/login",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
-    },
-  );
-
-  if (!res.ok) throw new Error("Login failed");
-  const student = await res.json();
-  localStorage.setItem("student", JSON.stringify(student));
-  window.location.href = "student.html";
-}
 
 async function login() {
   const role = document.getElementById("role").value;
@@ -43,14 +28,18 @@ async function login() {
   const password = document.getElementById("password").value;
 
   if (role === "student") {
-    const res = await fetch("https://your-app.onrender.com/students/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
-    });
+    const res = await fetch(
+      "https://project-student-information-system.onrender.com/students/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      },
+    );
 
     if (res.ok) {
       const student = await res.json();
+      // Save student ID for student.js to use
       localStorage.setItem("loggedInStudentID", student._id);
       window.location.href = "student.html";
       return;
@@ -63,6 +52,7 @@ async function login() {
   }
   alert("Invalid credentials!");
 }
+
 alert(
   "Welcome to the Student Information System! Please log in to faculty to setup student, username: admin, password: admin123. For student login, use any enrolled student credentials or default password student123 if none set.",
 );
